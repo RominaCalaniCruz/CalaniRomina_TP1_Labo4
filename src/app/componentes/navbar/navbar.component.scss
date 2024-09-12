@@ -1,0 +1,21 @@
+.fondo{
+    // margin-top: 10px;
+    background: rgba(255, 255, 255, 0.267);
+    width: 100vw;
+    // border-radius: 5px;
+    // color: white;
+}
+.nombre{
+    background-image: url('../../../../public/forma.png');
+    // width: 200px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
+}
+.active-route {
+    color: #FFAE7E;
+    border-bottom: solid;
+}
+.active-route:hover{
+    background-color: transparent !important;
+}
