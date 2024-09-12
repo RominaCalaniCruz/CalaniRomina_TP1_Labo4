@@ -48,3 +48,7 @@ module.exports = {
   ],
 }
 
+// {
+//   "glob": "**/*",
+//   "input": "public"
+// }

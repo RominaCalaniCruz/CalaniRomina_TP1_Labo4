@@ -13,10 +13,10 @@ export class JuegosComponent {
   imagen2 = './ahorcado2.png';
   imagen3 = './mayor_menor.png';
   imagen4 = './quiz.png';
-  gif = '../../assets/gifs/slot.gif';
-  gif2 = '';
-  gif3 = '';
-  gif4 = '';
+  // gif = '../../assets/gifs/slot.gif';
+  // gif2 = '';
+  // gif3 = '';
+  // gif4 = '';
   mostrarGif = false;
   constructor(private router: Router) { }
   alternarGif(): void {

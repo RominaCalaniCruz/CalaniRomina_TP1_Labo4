@@ -4,13 +4,13 @@
 
 @font-face {
     font-family: 'Bonie';
-    src: url('../public/fonts/ReklameScript-Regular_DEMO.otf') format('opentype');
+    src: url('/ReklameScript.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
   @font-face {
     font-family: 'Playpen';
-    src: url('../public/fonts/PlaypenSans-VariableFont_wght.ttf') format('truetype');
+    src: url('/PlaypenSans.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
   }
@@ -20,7 +20,7 @@ body{
     font-size: larger;
     
     // background: #bbbfff;
-    background-image:url('../public/fantasma.gif'), url('../public/fondo.png') ;
+    background-image:url('/fantasma.gif'), url('/fondo.png') ;
     // background-image: url('./assets/fantasma.gif');
     // background: #f5c25a;
     background-attachment: fixed;

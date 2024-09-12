@@ -11,6 +11,26 @@
         "source": "**",
         "destination": "/index.html"
       }
+    ],
+    "headers": [
+      {
+        "source": "**/fonts/*.ttf",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "font/ttf"
+          }
+        ]
+      },
+      {
+        "source": "**/fonts/*.otf",
+        "headers": [
+          {
+            "key": "Content-Type",
+            "value": "font/otf"
+          }
+        ]
+      }
     ]
   }
 }
