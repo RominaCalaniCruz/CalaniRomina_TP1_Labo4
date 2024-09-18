@@ -3,31 +3,33 @@
 @tailwind utilities;
 
 @font-face {
-    font-family: 'Bonie';
-    src: url('/ReklameScript.otf') format('opentype');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'Playpen';
-    src: url('/PlaypenSans.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-  }
-body{
-    height: 100vh;
-    letter-spacing: 1px;
-    font-size: larger;
-    
-    // background: #bbbfff;
-    background-image:url('/fantasma.gif'), url('/fondo.png') ;
-    // background-image: url('./assets/fantasma.gif');
-    // background: #f5c25a;
-    background-attachment: fixed;
-    background-size: 150px,cover; 
-  background-repeat: no-repeat, no-repeat;
-  background-position: center center, center center; 
-
-
+  font-family: "Bonie";
+  src: url("/ReklameScript.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
 }
+@font-face {
+  font-family: "Playpen";
+  src: url("/PlaypenSans.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+body {
+  height: 100vh;
+  letter-spacing: 1px;
+  font-size: larger;
 
+  
+  // background-image: url("/fantasma-ezgif.com-optimize.gif"), url("/fondo.webp");
+  // background-attachment: fixed, fixed;
+  // background-size: 150px, cover;
+  // background-repeat: no-repeat, no-repeat;
+  // background-position: center, top;
+  // will-change: background-position;
+  background-image: url("/fondo.webp");
+  background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top;
+  will-change: background-position;
+}

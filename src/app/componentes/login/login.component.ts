@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { jamGamepadRetroF, jamEyeCloseF, jamEyeF,jamCloseRectangleF } from '@ng-icons/jam-icons';
+import { jamGamepadRetroF, jamEyeCloseF, jamEyeF,jamCloseRectangleF, jamArrowSquareRightF} from '@ng-icons/jam-icons';
 import { Modal } from 'flowbite';
 import type { ModalOptions, ModalInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
@@ -11,7 +11,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, NgIconComponent],
-  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF,jamCloseRectangleF })],
+  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF,jamCloseRectangleF, jamArrowSquareRightF })],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   animations: [
