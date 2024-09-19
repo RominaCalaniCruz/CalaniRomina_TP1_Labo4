@@ -29,6 +29,8 @@ export class LoginComponent implements OnInit{
   @ViewChild('authenticationModal') modalElement!: ElementRef; // Usa ViewChild para obtener el modal
   isPasswordVisible = false;
   showModal = false;
+  isLoading: boolean = false;
+
   loginForm!: FormGroup;
   fireSvc = inject(FirestoreService);
   authSvc = inject(AuthService);
@@ -92,6 +94,7 @@ ngOnInit(): void {
   }
   iniciarSesion(){
     if(this.loginForm.valid){
+      this.isLoading=true;
       const formValues = this.loginForm.getRawValue();
       this.authSvc.login(formValues.email,formValues.password, () => this.cerrar());
       // this.guardarLog(formValues.email);
@@ -115,6 +118,7 @@ ngOnInit(): void {
     if (this.modal) {
       this.showModal=false;
       this.loginForm.reset();
+      this.isLoading=false;
       setTimeout(() => {        
         this.modal.hide();
       }, 250);

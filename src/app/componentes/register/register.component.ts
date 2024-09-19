@@ -30,6 +30,8 @@ export class RegisterComponent implements OnInit {
   @ViewChild('registerModal') modalElement!: ElementRef; // Usa ViewChild para obtener el modal
   isPasswordVisible = false;
   showModal = false;
+  isLoading: boolean = false;
+
   registerForm!: FormGroup;
   fireSvc = inject(FirestoreService);
   authSvc = inject(AuthService);
@@ -80,6 +82,8 @@ ngOnInit(): void {
 
   crearCuenta(){
     if(this.registerForm.valid){
+      this.isLoading=true;
+
       const formValues = this.registerForm.getRawValue();
       this.authSvc.registerAccount(formValues.nombre, formValues.correo, formValues.pass,() => this.cerrar());
 
@@ -103,6 +107,7 @@ ngOnInit(): void {
   cerrar() {
     if (this.modal) {
       this.showModal=false;
+      this.isLoading=false;
       this.registerForm.reset();
       setTimeout(() => {        
         this.modal.hide();

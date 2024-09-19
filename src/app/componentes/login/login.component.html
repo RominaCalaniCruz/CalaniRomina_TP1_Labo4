@@ -70,6 +70,9 @@ class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
     </div>
 </div>
 
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50">
+    <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
+  </div>
 
 <app-register  #register></app-register>
 
