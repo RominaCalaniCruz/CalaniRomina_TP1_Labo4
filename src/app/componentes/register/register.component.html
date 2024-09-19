@@ -1,1 +1,66 @@
-<p>register works!</p>
+ <!-- <button data-modal-target="authenticationModal" data-modal-toggle="authenticationModal"
+    class="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+    type="button">
+    Toggle modal
+</button> -->
+
+<div #registerModal id="registerModal" tabindex="-1" aria-hidden="true" 
+[ngClass]="{ 'animate-slideInUp': showModal, 'animate-slideOutDown': !showModal }"
+class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative p-4 w-full max-w-md max-h-full ">
+        <div class="relative fondo rounded-lg shadow dark:bg-gray-700 ">
+            <div class="flex items-center bg-primary justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                    Iniciar Sesión
+                </h3>
+                <button type="button" class="end-2.5 text-gray-400 bg-transparent hover:bg-secondary hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" (click)="cerrar()">
+                    
+                    <ng-icon class="w-3 h-3" aria-hidden="true" name="jamCloseRectangleF" size="2em" color="white"></ng-icon>
+                    <span class="sr-only">Cerrar</span>
+                </button>
+            </div>
+            <div class="p-4 md:p-5">
+                <form [formGroup]="registerForm" (ngSubmit)="crearCuenta()" (keypress.enter)="crearCuenta()" class="space-y-4" action="#">
+                    <div>
+                        <label for="nombre" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de usuario</label>
+                        <input formControlName="nombre" type="text" name="nombre" id="nombre" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="jugadorX" required />
+                    </div>
+                    <div>
+                        <label for="email" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Correo Electrónico</label>
+                        <input formControlName="correo" type="email" name="email" id="correo" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="usuario@email.com" required />
+                    </div>
+                    <div>
+                        <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
+                        <div class="relative">
+                            <input [type]="isPasswordVisible ? 'text' : 'password'"
+                                    formControlName="pass"
+                                   name="password" 
+                                   id="pass" 
+                                   placeholder="••••••••" 
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white"
+                                   required />
+                            <button type="button" 
+                                    (click)="togglePasswordVisibility()" 
+                                    class="absolute inset-y-0 right-0 flex items-center px-3 text-gray-500">
+                                    <ng-icon *ngIf="!isPasswordVisible" name="jamEyeF" class="w-5 h-5"></ng-icon>
+                                    <ng-icon *ngIf="isPasswordVisible" name="jamEyeCloseF" class="w-5 h-5"></ng-icon>
+                                </button>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="w-full flex items-center justify-center text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Crear Cuenta <ng-icon name="jamArrowSquareRightF" color="white" class="ms-2"></ng-icon></button>
+                    
+                    
+                    <!-- <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
+                        Tienes una cuenta? <a  class="text-secondary font-bold hover:underline dark:text-blue-500" (click)="abrirLogin()">Inicia Sesión</a>
+                    </div> -->
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <app-login #hola></app-login> -->
+
+
+<!-- Tuto123 - romina@gmail.com -->

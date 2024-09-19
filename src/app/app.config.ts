@@ -23,7 +23,6 @@ export const appConfig: ApplicationConfig = {
     provideFirestore(() => getFirestore()),
     provideToastr({
       timeOut: 2000,
-      preventDuplicates:true,
       progressBar: true,
       closeButton: true
     })

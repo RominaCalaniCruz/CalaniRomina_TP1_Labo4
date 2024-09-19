@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterOutlet } from '@angular/router';
 import { initFlowbite } from 'flowbite';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { tdesignGamepad1 } from '@ng-icons/tdesign-icons';
 import { jamGamepadRetroF,jamPlaySquareF } from '@ng-icons/jam-icons';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -16,7 +17,9 @@ import { jamGamepadRetroF,jamPlaySquareF } from '@ng-icons/jam-icons';
 })
 export class AppComponent implements OnInit{
   title = 'labo4-tp';
+  authSvc = inject(AuthService);
   ngOnInit(): void {
     initFlowbite();
+    this.authSvc.traerUsuarioActual();
   }
 }

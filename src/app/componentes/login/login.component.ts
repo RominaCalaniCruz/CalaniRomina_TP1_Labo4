@@ -1,45 +1,49 @@
 import { CommonModule } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { jamGamepadRetroF, jamEyeCloseF, jamEyeF,jamCloseRectangleF, jamArrowSquareRightF} from '@ng-icons/jam-icons';
+import { jamGamepadRetroF, jamEyeCloseF, jamEyeF,jamCloseRectangleF, jamArrowSquareRightF, jamAndroid, jamGhostF, jamPadlockF} from '@ng-icons/jam-icons';
 import { Modal } from 'flowbite';
 import type { ModalOptions, ModalInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { FormControl, FormsModule } from '@angular/forms';
+import { FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Timestamp } from '@angular/fire/firestore';
+import { FirestoreService } from '../../services/firestore.service';
+import { AuthService } from '../../services/auth.service';
+import { ToastrService } from 'ngx-toastr'
+import { Router } from '@angular/router';
+import { RegisterComponent } from '../register/register.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, NgIconComponent],
-  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF,jamCloseRectangleF, jamArrowSquareRightF })],
+  imports: [CommonModule, NgIconComponent, FormsModule, ReactiveFormsModule, RegisterComponent],
+  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF,jamCloseRectangleF, jamArrowSquareRightF,jamAndroid, jamGhostF , jamPadlockF})],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
-  animations: [
-    trigger('modalSlide', [
-      state('void', style({
-        transform: 'translateY(100%)',
-        opacity: 0
-      })),
-      state('*', style({
-        transform: 'translateY(0)',
-        opacity: 1
-      })),
-      transition('void => *', [
-        animate('300ms ease-in')
-      ]),
-      transition('* => void', [
-        animate('300ms ease-out')
-      ]),
-    ]),
-  ]
+  styleUrl: './login.component.scss'
 
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
+  @ViewChild('register') registerComp!: RegisterComponent;
   @ViewChild('authenticationModal') modalElement!: ElementRef; // Usa ViewChild para obtener el modal
   isPasswordVisible = false;
   showModal = false;
+  loginForm!: FormGroup;
+  fireSvc = inject(FirestoreService);
+  authSvc = inject(AuthService);
+  toastM = inject(ToastrService);
+  router = inject(Router);
   // modalElement: any = document.getElementById('authenticationModal');
-
+constructor(){
+  
+}
+ngOnInit(): void {
+  this.loginForm = new FormGroup({
+    email: new FormControl('',[Validators.required, Validators.email]),
+    password: new FormControl('',[Validators.required])
+  }, Validators.required);
+}
   modalOptions: ModalOptions = {
     placement: 'bottom-right',
     backdrop: 'dynamic',
@@ -71,7 +75,33 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.isPasswordVisible = !this.isPasswordVisible;
   }
+  guardarLog(email: string) {
+    const currentDate = Timestamp.fromDate(new Date());
+    const log = {
+      user: email,
+      date: currentDate,
+    };
+    this.fireSvc.guardarDato('logs_users', log);
+  }
 
+  autocompletar(correo:string, pass:string){
+    this.loginForm.setValue({
+      email: correo,
+      password: pass
+    });
+  }
+  iniciarSesion(){
+    if(this.loginForm.valid){
+      const formValues = this.loginForm.getRawValue();
+      this.authSvc.login(formValues.email,formValues.password, () => this.cerrar());
+      // this.guardarLog(formValues.email);
+      
+      // this.cerrar();
+      // this.router.navigate(['juegos']);
+    }else{
+      this.toastM.info("Faltan campos","Aviso");
+    }
+  }
   abrir(){
     this.showModal=true;
     if(this.modal){
@@ -84,6 +114,7 @@ export class LoginComponent {
   cerrar() {
     if (this.modal) {
       this.showModal=false;
+      this.loginForm.reset();
       setTimeout(() => {        
         this.modal.hide();
       }, 250);
@@ -92,4 +123,14 @@ export class LoginComponent {
       console.log("error");
     }
   }
+
+  abrirRegistro(){
+    this.cerrar();
+    if(this.registerComp){
+      this.registerComp.abrir();
+    }
+    // this.registerComp.abrir();
+    // this.switchToRegister.emit();
+  }
+
 }
