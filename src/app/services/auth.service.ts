@@ -16,31 +16,30 @@ export class AuthService {
   sesionActiva: boolean = false;
   constructor() { }
 
-  login(email: string, pass: string, callback?: () => void) {
+  login(email: string, pass: string) {
     const auth = getAuth();
-    signInWithEmailAndPassword(auth, email, pass)
+    return signInWithEmailAndPassword(auth, email, pass)
       .then((userCredential) => {
         const user = userCredential.user;
         console.log(user.email);
         this.toastM.info(`Hola, ${(user.displayName) ?  user.displayName : user.email}`, 'Bienvenido');
         this.fireSvc.guardarLog(email);
         this.router.navigate(['juegos']);
-        if (callback) {
-          callback();
-        }
+        return user;
       }).catch((error) => {
         const errorCode = error.code;
         let mensajeTexto: string = this.convertirError(errorCode);
         console.error(errorCode);
 
         this.toastM.error(`Error: ${mensajeTexto}`, 'Error en el inicio de sesión');
-      })
+        throw errorCode;
+      });
   }
 
 
-  registerAccount(username: string, email: string, pass: string, callback?: () => void) {
+  registerAccount(username: string, email: string, pass: string) {
     const auth = getAuth();
-    createUserWithEmailAndPassword(auth, email, pass)
+    return createUserWithEmailAndPassword(auth, email, pass)
       .then((userCredential) => {
         const user = userCredential.user;
         if (user) {
@@ -50,15 +49,15 @@ export class AuthService {
         this.toastM.success(`Hola, ${(user.displayName) ?  user.displayName : user.email}`, 'Bienvenido');
         this.fireSvc.guardarLog(email);
         this.router.navigate(['juegos']);
-        if (callback) {
-          callback();
-        }
+        return user;
       }).catch((error) => {
         const errorCode = error.code;
         let mensajeTexto: string = this.convertirError(errorCode);
         console.error(errorCode);
 
         this.toastM.error(`Error: ${mensajeTexto}`, 'Error en el inicio de sesión');
+        throw errorCode;
+
       });
   }
 

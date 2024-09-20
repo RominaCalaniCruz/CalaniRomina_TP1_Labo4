@@ -24,7 +24,8 @@ export const appConfig: ApplicationConfig = {
     provideToastr({
       timeOut: 2000,
       progressBar: true,
-      closeButton: true
+      closeButton: true,
+      toastClass:'estilo ngx-toastr'
     })
   ]
   // #fc3d6d

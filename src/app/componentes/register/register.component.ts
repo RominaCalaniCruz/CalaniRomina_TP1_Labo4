@@ -85,7 +85,12 @@ ngOnInit(): void {
       this.isLoading=true;
 
       const formValues = this.registerForm.getRawValue();
-      this.authSvc.registerAccount(formValues.nombre, formValues.correo, formValues.pass,() => this.cerrar());
+      this.authSvc.registerAccount(formValues.nombre, formValues.correo, formValues.pass)
+      .then(()=>{
+        this.cerrar();
+      }).finally(()=>{
+        this.isLoading=false;
+      })
 
       // this.authSvc.login(formValues.email,formValues.password);
       // this.guardarLog(formValues.correo);
@@ -107,7 +112,6 @@ ngOnInit(): void {
   cerrar() {
     if (this.modal) {
       this.showModal=false;
-      this.isLoading=false;
       this.registerForm.reset();
       setTimeout(() => {        
         this.modal.hide();

@@ -36,12 +36,11 @@ export class NavbarComponent implements OnInit {
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
+  
   @HostListener('document:click', ['$event'])
   closeDropdownOnClickOutside(event: Event) {
     const dropdownButton = document.getElementById('user-menu-button');
     const dropdownMenu = document.getElementById('user-dropdown');
-    
-    // Verifica si el clic ocurrió fuera del botón o el dropdown
     if (dropdownButton && dropdownMenu && !dropdownButton.contains(event.target as Node) && !dropdownMenu.contains(event.target as Node)) {
       this.isDropdownOpen = false;
     }

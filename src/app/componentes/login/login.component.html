@@ -4,7 +4,7 @@
     Toggle modal
 </button> -->
 
-<div #authenticationModal id="authenticationModal" tabindex="-1" aria-hidden="true" 
+<div [class.pointer-events-none]="isLoading" #authenticationModal id="authenticationModal" tabindex="-1" aria-hidden="true" 
 [ngClass]="{ 'animate-slideInUp': showModal, 'animate-slideOutDown': !showModal }"
 class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
     <div class="relative p-4 w-full max-w-md max-h-full ">
@@ -46,21 +46,22 @@ class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
                     
                     <button type="submit" class="w-full flex items-center justify-center text-white bg-primary hover:bg-secondary focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Ingresar <ng-icon name="jamArrowSquareRightF" color="white" class="ms-2"></ng-icon></button>
                     
-                    <div class="flex justify-between rounded-md shadow-sm" role="group">
-                        <button (click)="autocompletar('romina@gmail.com', 'Tuto123')" type="button" class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
+                    <div class="w-full flex justify-between rounded-md shadow-sm" role="group">
+                        <button (click)="autocompletar('romina@gmail.com', 'Tuto123')" type="button" class="flex items-center sm:px-3 md:px-4 px-1 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
                           <ng-icon name="jamAndroid" class="me-1"></ng-icon> 
                           Jugador 1
                         </button>
-                        <button (click)="autocompletar('user@gmail.com','GamePlay')" type="button" class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
+                        <button (click)="autocompletar('user@gmail.com','GamePlay')" type="button" class="flex items-center sm:px-4 md:px-4 px-1 py-2 text-sm font-medium text-gray-900 bg-white border-t border-b border-gray-200 hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
                             <ng-icon name="jamGhostF" class="me-1"></ng-icon> 
                           Jugador 2
                         </button>
-                        <button (click)="autocompletar('admin@gmail.com', 'Admin$1$')" type="button" class="flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
+                        <button (click)="autocompletar('admin@gmail.com', 'Admin$1$')" type="button" class="flex items-center sm:px-4 md:px-4 px-1 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-secondary hover:text-white focus:z-10 focus:ring-2 focus:ring-secondary ">
                             <ng-icon name="jamPadlockF" class="me-1"></ng-icon> 
                            Admin
                         </button>
                       </div>
-                    
+                      
+                      
                     <div class="text-sm font-medium text-gray-500 dark:text-gray-300">
                         Sin cuenta? <a  class="text-secondary font-bold hover:underline dark:text-blue-500" (click)="abrirRegistro()">Crea tu usuario ahora</a>
                     </div>
@@ -70,7 +71,7 @@ class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
     </div>
 </div>
 
-<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50">
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50 pointer-events-auto">
     <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
   </div>
 

@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, EventEmitter, inject, OnInit, Output, ViewChild } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
-import { jamGamepadRetroF, jamEyeCloseF, jamEyeF,jamCloseRectangleF, jamArrowSquareRightF, jamAndroid, jamGhostF, jamPadlockF} from '@ng-icons/jam-icons';
+import { jamGamepadRetroF, jamEyeCloseF, jamEyeF, jamCloseRectangleF, jamArrowSquareRightF, jamAndroid, jamGhostF, jamPadlockF } from '@ng-icons/jam-icons';
 import { Modal } from 'flowbite';
 import type { ModalOptions, ModalInterface } from 'flowbite';
 import type { InstanceOptions } from 'flowbite';
@@ -19,12 +19,12 @@ import { RegisterComponent } from '../register/register.component';
   selector: 'app-login',
   standalone: true,
   imports: [CommonModule, NgIconComponent, FormsModule, ReactiveFormsModule, RegisterComponent],
-  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF,jamCloseRectangleF, jamArrowSquareRightF,jamAndroid, jamGhostF , jamPadlockF})],
+  providers: [provideIcons({ jamGamepadRetroF, jamEyeF, jamEyeCloseF, jamCloseRectangleF, jamArrowSquareRightF, jamAndroid, jamGhostF, jamPadlockF })],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 
 })
-export class LoginComponent implements OnInit{
+export class LoginComponent implements OnInit {
   @ViewChild('register') registerComp!: RegisterComponent;
   @ViewChild('authenticationModal') modalElement!: ElementRef; // Usa ViewChild para obtener el modal
   isPasswordVisible = false;
@@ -37,15 +37,15 @@ export class LoginComponent implements OnInit{
   toastM = inject(ToastrService);
   router = inject(Router);
   // modalElement: any = document.getElementById('authenticationModal');
-constructor(){
-  
-}
-ngOnInit(): void {
-  this.loginForm = new FormGroup({
-    email: new FormControl('',[Validators.required, Validators.email]),
-    password: new FormControl('',[Validators.required])
-  }, Validators.required);
-}
+  constructor() {
+
+  }
+  ngOnInit(): void {
+    this.loginForm = new FormGroup({
+      email: new FormControl('', [Validators.required, Validators.email]),
+      password: new FormControl('', [Validators.required])
+    }, Validators.required);
+  }
   modalOptions: ModalOptions = {
     placement: 'bottom-right',
     backdrop: 'dynamic',
@@ -54,7 +54,7 @@ ngOnInit(): void {
     closable: true,
     onHide: () => {
       console.log('modal is hidden');
-      
+
     },
     onShow: () => {
       console.log('modal is shown');
@@ -86,51 +86,53 @@ ngOnInit(): void {
     this.fireSvc.guardarDato('logs_users', log);
   }
 
-  autocompletar(correo:string, pass:string){
+  autocompletar(correo: string, pass: string) {
     this.loginForm.setValue({
       email: correo,
       password: pass
     });
   }
-  iniciarSesion(){
-    if(this.loginForm.valid){
-      this.isLoading=true;
+  iniciarSesion() {
+    if (this.loginForm.valid) {
+      this.isLoading = true;
       const formValues = this.loginForm.getRawValue();
-      this.authSvc.login(formValues.email,formValues.password, () => this.cerrar());
-      // this.guardarLog(formValues.email);
-      
-      // this.cerrar();
-      // this.router.navigate(['juegos']);
-    }else{
-      this.toastM.info("Faltan campos","Aviso");
+      this.authSvc.login(formValues.email, formValues.password)
+      .then(()=>{
+        this.cerrar();
+      }).finally(()=>{
+        this.isLoading=false;
+      });
+
+    } else {
+      this.toastM.info("Faltan campos", "Aviso");
+
     }
   }
-  abrir(){
-    this.showModal=true;
-    if(this.modal){
+  abrir() {
+    this.showModal = true;
+    if (this.modal) {
       this.modal.show();
-    }else{
+    } else {
       console.log("error");
-      
+
     }
   }
   cerrar() {
     if (this.modal) {
-      this.showModal=false;
+      this.showModal = false;
       this.loginForm.reset();
-      this.isLoading=false;
-      setTimeout(() => {        
+      setTimeout(() => {
         this.modal.hide();
       }, 250);
-      
+
     } else {
       console.log("error");
     }
   }
 
-  abrirRegistro(){
+  abrirRegistro() {
     this.cerrar();
-    if(this.registerComp){
+    if (this.registerComp) {
       this.registerComp.abrir();
     }
     // this.registerComp.abrir();

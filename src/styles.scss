@@ -14,11 +14,41 @@
   font-weight: normal;
   font-style: normal;
 }
+
+
+
 body {
+  margin: 0;
+  padding: 0;
   height: 100vh;
   letter-spacing: 1px;
   font-size: larger;
-
+  
+  .estilo.toast-info{
+    background-color:#3498dbdc;
+    @media (max-width: 767px) {
+      font-size: medium;
+    }
+  }
+  .estilo.toast-error{
+    background-color:#f24c4cdc;
+    // f24c4c94
+    @media (max-width: 767px) {
+      font-size: medium;
+    }
+  }
+  .estilo.toast-success{
+    background-color:#0abf31dc;
+    @media (max-width: 767px) {
+      font-size: medium;
+    }
+  }
+  .estilo.toast-warning{
+    background-color:#e9bd0cdc;
+    @media (max-width: 767px) {
+      font-size: medium;
+    }
+  }
   
   // background-image: url("/fantasma-ezgif.com-optimize.gif"), url("/fondo.webp");
   // background-attachment: fixed, fixed;
