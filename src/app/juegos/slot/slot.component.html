@@ -1,1 +1,21 @@
-<p>slot works!</p>
+<div class="titulo">
+    <h1 class="text-primary text-4xl text-center m-0 mt-5 mb-10">
+      MAQUINA TRAGAMONEDAS
+    </h1>
+  </div>
+  
+  <div class="slot-machine">
+    <div class="reel" *ngFor="let reel of reels">
+      <img class="slot" [src]="reel.currentImage" alt="" />
+    </div>
+  </div>
+  <div class="botonera">
+    <div class="button-container">
+      <button mat-flat-button color="accent" (click)="girarReel()" [disabled]="start">
+        Girar
+      </button>
+      <button mat-flat-button color="warn" (click)="detenerReel()" [disabled]="!start">
+        Detener
+      </button>
+    </div>
+  </div>

@@ -1,0 +1,32 @@
+
+  
+  <div class="chat-content">
+    <div class="chat-container" *ngIf="authSvc.sesionActiva && !loading">
+      <div class="scroll-container">
+        <div class="messages" #messageContainer>
+          <div *ngFor="let message of messages" [ngClass]="{
+              'current-user': message.email === emailActual,
+              'other-user': message.email !== emailActual
+            }">
+            <p style="font-size: medium;">
+              <strong>{{ message.nombre ? message.nombre : message.email}}</strong>
+            </p> 
+            <p style="font-size: x-large; margin: 5px 0px;">{{ message.mensaje }}
+              
+            </p>
+            <p style="font-size: small;">{{ message.fecha.toDate() | date : "short" }}</p>
+          </div>
+        </div>
+      </div>
+  
+      <div class="message-input">
+        <input type="text" class="border border-gray-300 focus:ring-secondary focus:border-secondary" [(ngModel)]="newMessage" placeholder="Escribe algo..." />
+        <button mat-fab color="warn" (click)="guardarMensaje()">
+          <ng-icon name="matSendRound" ></ng-icon> 
+        </button>
+      </div>
+    </div>
+    <div class="no-registrado" *ngIf="!authSvc.sesionActiva">
+      <h3>Necesitas iniciar sesion para acceder al chat.</h3>
+    </div>
+  </div>

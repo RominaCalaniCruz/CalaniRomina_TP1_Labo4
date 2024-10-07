@@ -1,0 +1,155 @@
+.juego {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin: 0 10px;
+  
+    h1 {
+      margin-bottom: 5px;
+    }
+  }
+  
+  .card-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: inline-block;
+  }
+  
+  .card img {
+    width: 200px;
+    margin: 0 30px;
+    box-shadow: 1px 9px 30px -1px rgb(0, 0, 0);
+
+    border-radius: 10px;
+  }
+
+  .card{
+    display: flex;
+  }
+  
+  .heart {
+    color: red;
+    margin-right: 5px;
+  }
+  
+  .lost-life {
+    opacity: 1; /* Inicialmente, la opacidad completa */
+    color: red; /* Comienza con el color rojo */
+    transform: translateY(0); /* Posición inicial */
+    transition: color 0.8s ease-in-out; /* Transición para cambiar el color */
+    animation: slideFadeAndReturn 1.2s ease-in-out forwards; /* Animación de deslizamiento, cambio y retorno */
+  }
+  
+  @keyframes slideFadeAndReturn {
+    0% {
+      transform: translateY(0); /* Posición inicial */
+      opacity: 1; /* Comienza completamente visible */
+      color: red; /* Comienza con color rojo */
+    }
+    50% {
+      transform: translateY(20px); /* Desliza hacia abajo */
+      opacity: 0.6; /* Reduce la opacidad */
+      color: gray; /* Cambia el color a gris */
+    }
+    75% {
+      transform: translateY(10px); /* Comienza a regresar hacia arriba */
+      opacity: 0.3; /* Más transparente */
+      color: gray; /* Mantiene el color gris */
+    }
+    100% {
+      transform: translateY(0); /* Regresa a la posición original */
+      opacity: 1; /* Retorna la opacidad completa */
+      color: gray; /* Mantiene el color gris */
+    }
+  }
+  
+  .hearts-container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .corazon {
+    font-size: 50px;
+    height: auto;
+    width: auto;
+  }
+  
+  .snack-bar-enter {
+    animation: fadeIn 0.5s;
+    background-color: #08e23e !important;
+    color: green;
+  }
+  
+  .snack-bar-exit {
+    animation: fadeOut 0.5s;
+    background-color: #678b36;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+  
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes fadeOut {
+    from {
+      opacity: 1;
+    }
+  
+    to {
+      opacity: 0;
+    }
+  }
+
+  .mayor-menor-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+    button {
+      margin: 0 30px;
+      width: 200px;
+      height: 50px;
+      font-size: larger;
+    }
+  }
+  
+  .inicio {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    button {
+      width: 200px;
+      height: 50px;
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .card {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: row;
+  
+      img {
+        width: 100px;
+        margin: 0 10px;
+      }
+  
+      margin-bottom: 25px;
+    }
+  
+    .mayor-menor-btn {
+      flex-direction: column;
+  
+      button {
+        margin: 10px 0;
+      }
+    }
+  }

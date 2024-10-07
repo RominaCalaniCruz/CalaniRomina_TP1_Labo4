@@ -1,1 +1,56 @@
-<p>cartas works!</p>
+<div class="juego">
+    <h1 class="text-4xl text-primary mt-4">
+        Mayor o menor</h1>
+    <span class="text-2xl text-black mt-3"
+        *ngIf="!jugando">Adivina si la siguiente carta es mayor o menor a la actual</span>
+
+    <span
+    class="text-2xl text-primary mt-4 mb-5">Cantidad
+        de vidas: {{cantVidas}}</span>
+    <div style="display: flex; justify-content: center; align-items: center;">
+
+        <!-- <mat-progress-spinner color="warn" *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner> -->
+
+    </div>
+    <div class="hearts-container mb-5" *ngIf="jugando || finJuego">
+        <ng-icon size="50px" [name]="cantVidas >= 1 ? 'tablerHeartFill' : 'tablerHeartBroken'"
+            [ngClass]="{ 'lost-life': cantVidas < 1 }" [color]="cantVidas >= 1 ? 'red' : 'gray'"></ng-icon>
+        <ng-icon size="50px" [name]="cantVidas >= 2 ? 'tablerHeartFill' : 'tablerHeartBroken'"
+            [ngClass]="{ 'lost-life': cantVidas < 2 }" [color]="cantVidas >= 2 ? 'red' : 'gray'"></ng-icon>
+        <ng-icon size="50px" [name]="cantVidas >= 3 ? 'tablerHeartFill' : 'tablerHeartBroken'"
+            [ngClass]="{ 'lost-life': cantVidas < 3 }" [color]="cantVidas >= 3 ? 'red' : 'gray'"></ng-icon>
+
+    </div>
+    <div *ngIf="!isLoading">
+        <div class="card-container">
+            <div class="card">
+                <img [src]="cards[currentCardIndex].image">
+                <img [src]="cards[currentCardIndex + 1].image" *ngIf="vistaTemporal">
+                <img [src]="cartaAtras" *ngIf="!vistaTemporal">
+            </div>
+        </div>
+        <div class="inicio mt-4" *ngIf="!jugando && !finJuego">
+            <button class="text-center inline-flex justify-center items-center text-white hover:bg-purple-700 bg-secondary rounded-lg focus:ring-2 focus:ring-purple-600" color="warn" (click)="iniciarPartida()">
+                COMENZAR
+                <ng-icon name="tablerPlayerPlayFill" color="white"></ng-icon>
+
+            </button>
+        </div>
+        <div class="mayor-menor-btn mt-4" *ngIf="jugando">
+            <button class="text-center inline-flex justify-center items-center  text-white hover:bg-purple-700 bg-secondary rounded-lg focus:ring-2 focus:ring-purple-600" (click)="esMayor()">Mayor
+                <ng-icon name="tablerArrowNarrowUp" color="white"></ng-icon>
+
+            </button>
+            <button class=" text-center inline-flex justify-center items-center text-white hover:bg-purple-700 bg-secondary rounded-lg focus:ring-2 focus:ring-purple-600" (click)="esMenor()">
+                Menor
+                <ng-icon name="tablerArrowNarrowDown" color="white"></ng-icon>
+            </button>
+        </div>
+        <div class="inicio mt-4" *ngIf="finJuego">
+            <button class="text-center inline-flex justify-center items-center text-white hover:bg-purple-700 bg-secondary rounded-lg focus:ring-2 focus:ring-purple-600" (click)="reiniciarPartida()">REINICIAR
+                <ng-icon name="tablerReload" color="white"></ng-icon>
+
+            </button>
+        </div>
+    </div>
+</div>

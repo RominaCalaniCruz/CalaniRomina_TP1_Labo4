@@ -1,0 +1,138 @@
+.chat-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  .messages{
+    margin-right: 5px;
+  }
+  .titulo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .message-input {
+    display: flex;
+    border-radius: 15px;
+    justify-content: space-between;
+    margin: 5px 0px;
+    input {
+      width: 93%;
+      border-radius: 10px;
+      font-size: 15px;
+      background-color: transparent;
+      color: white;
+    }
+  }
+  ::placeholder { /* Most modern browsers support this now. */
+    color:    white;
+ }
+//  Scrollbar
+ ::-webkit-scrollbar {
+  width: 8px;
+}
+
+/* Barra fondo */
+::-webkit-scrollbar-track {
+  background: #4a235949; 
+  border-radius: 3px;
+}
+ 
+/* Handle-barra */
+::-webkit-scrollbar-thumb {
+  background: #4a2359; 
+  border-radius: 3px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #FFAE7E; 
+}
+  .chat-container {
+    width: 600px;
+    background-color: transparent;
+    border-radius: 40px;
+    padding: 10px 20px;
+    box-shadow: 1px 9px 30px -1px rgb(0, 0, 0);
+    border-radius: 10px;
+    padding-bottom: 2px;
+  }
+  
+  .scroll-container {
+    max-height: 435px;
+    overflow-y: auto;
+  }
+  
+  .chat-list {
+    width: 50%;
+    padding: 20px;
+    border-right: 1px solid #ccc;
+  }
+  
+  .chat-input {
+    width: 50%;
+    padding: 20px;
+  }
+  
+  span {
+    font-weight: bold;
+  }
+  
+  .no-registrado {
+    background-color: azure;
+    padding: 0 15px;
+    text-align: center;
+    border-radius: 30px;
+  }
+  
+  .current-user {
+    display: flex;
+    text-align: right;
+    justify-content: flex-end;
+    background-color: #bdbdbdc7;
+    flex-direction: column;
+    padding: 0 15px;
+    border-radius: 10px;
+    border-top-right-radius: 0px;
+    width: max-content;
+    margin-left: auto !important;
+  
+    // p {
+    //   margin: 5px 5px;
+    // }
+  
+    margin: 10px 0;
+  }
+  
+  .other-user {
+    display: flex;
+    background-color: #ffad7ebe;
+    flex-direction: column;
+    padding: 0 15px;
+    border-radius: 10px;
+    border-top-left-radius: 0px;
+    width: max-content;
+  
+    // p {
+    //   margin: 5px 5px;
+    // }
+  
+    margin: 10px 0;
+  }
+  
+  @media (max-width: 600px) {
+    .chat-container {
+      width: -webkit-fill-available;
+      padding: 10px 9px;
+    }
+  
+    .scroll-container {
+      max-height: 430px;
+    }
+  
+    .current-user {
+      margin-left: auto;
+    }
+  }

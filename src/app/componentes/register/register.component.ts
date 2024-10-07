@@ -45,8 +45,8 @@ ngOnInit(): void {
   this.registerForm = new FormGroup({
     nombre: new FormControl('',[Validators.required]),
     correo: new FormControl('',[Validators.required, Validators.email]),
-    pass: new FormControl('',[Validators.required])
-  }, Validators.required);
+    pass: new FormControl('',[Validators.required, Validators.minLength(4)])
+  }, Validators.required );
 }
   modalOptions: ModalOptions = {
     placement: 'bottom-right',

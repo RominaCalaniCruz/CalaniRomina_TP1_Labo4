@@ -9,6 +9,8 @@ import { getAuth, provideAuth } from '@angular/fire/auth';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { environmentConfig } from '../environments/environments';
 import { provideToastr } from 'ngx-toastr';
+import { provideHttpClient } from '@angular/common/http';
+
 export const appConfig: ApplicationConfig = {
   providers: [
     provideNgIconsConfig({
@@ -21,6 +23,7 @@ export const appConfig: ApplicationConfig = {
     provideFirebaseApp(() => initializeApp(environmentConfig)), 
     provideAuth(() => getAuth()), 
     provideFirestore(() => getFirestore()),
+    provideHttpClient(),
     provideToastr({
       timeOut: 2000,
       progressBar: true,

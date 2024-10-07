@@ -1,1 +1,54 @@
-<p>ahorcado works!</p>
+<h1 class="text-primary text-4xl text-center m-0 mt-5">AHORCADO</h1>
+<div class="hangman flex-col md:flex-row justify-center md:justify-evenly">
+    
+    <div class="portada rounded-md bg-transparent border border-secondary">
+
+      <img src="/ahorcado/{{ cantIntentos }}.png" class="ahorcado-img" />
+  
+      <h2 class="text-sm md:text-2xl text-white py-1 rounded-b-md bg-gray-700 w-full text-center ">
+        Intentos <small> {{ cantIntentos }} / 7</small>
+      </h2>
+    </div>
+  
+    <div class="contenedor flex-col items-center justify-evenly">
+
+        <div class=" text-sm md:text-2xl text-center px-5 py-2 palabra-oculta bg-gray-700 text-white rounded-md" *ngIf="jugando">
+          <h1>{{ palabraOculta }}</h1>
+        </div>
+      
+        <div class="ganador mt-5 md:mt-0 text-primary text-5xl text-center" *ngIf="gano">
+          <h1>¡Felicidades Ganaste!</h1>
+          <h1 class="mt-2">Obtuviste {{cantPuntos}} puntos</h1>
+        </div>
+      
+        <div class="perdedor md:text-4xl text-primary" *ngIf="perdio">
+          <h1>Ups..perdiste ( ´•︵•` )</h1>
+          <p class="md:text-2xl md:mt-3">
+            La palabra era: <strong>{{ palabra }}</strong>
+          </p>
+        </div>
+      
+        <div class="teclado" *ngIf="!gano && !perdio">
+          <ng-container *ngFor="let row of letrasTeclado; let i = index">
+            <div class="botones">
+              <button
+                *ngFor="let letra of row; let j = index"
+                class="boton  bg-primary rounded-lg text-sm md:text-2xl p-1 w-10 hover:bg-secondary hover:text-white"
+                (click)="comprobar(letra, i, j)"
+                [disabled]="desactivarBoton(i, j)"
+                [ngClass]="{ 'disabled': desactivarBoton(i, j) }"
+              >
+                {{ letra }}
+              </button>
+            </div>
+          </ng-container>
+        </div>
+      
+        <div *ngIf="!jugando">
+          <button class="bg-primary mt-5 md:mt-0 rounded-lg p-3 md:text-2xl" (click)="reiniciarPartida()">
+            REINICIAR PARTIDA
+          </button>
+        </div>
+    </div>
+  </div>
+  

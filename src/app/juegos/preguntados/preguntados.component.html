@@ -1,1 +1,39 @@
-<p>preguntados works!</p>
+<div class="juego">
+    <h1 class="text-primary md:text-4xl text-center mt-4">PREGUNTADOS</h1>
+
+    <h1 class="text-primary md:text-4xl text-center m-0 mt-4 mb-5">
+      ¿En que fecha se estreno la pelicula?
+    </h1>
+  
+    <div class="info" *ngIf="!jugando">
+      <!-- <p>Adivina y gana</p> -->
+      <p class="text-gray-700 rounded-md bg-primary px-4 py-3">
+        <strong>Tematica: Marvel</strong>
+      </p>
+      <button class="bg-secondary text-white px-4 py-2 mt-10" (click)="iniciarJuego()">
+        COMENZAR
+      </button>
+    </div>
+  
+    <div class="partida">
+      <div class="portada" *ngIf="jugando">
+        <img
+          *ngIf="opcionCorrecta.poster_path"
+          [src]="'https://image.tmdb.org/t/p/w500/' + opcionCorrecta.poster_path"
+          alt="{{ opcionCorrecta.title }}"
+        />
+      </div>
+  
+      <div class="opciones" *ngIf="jugando">
+        <div
+          class="btn-opciones"
+          *ngFor="let movie of preguntasLista[numeroPregunta]; let i = index"
+        >
+          <button (click)="verificarOpcion(i)" mat-flat-button>
+            {{ movie.release_date }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
