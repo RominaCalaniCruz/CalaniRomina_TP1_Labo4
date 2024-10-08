@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import {  addDoc, collection, Firestore, Timestamp} from '@angular/fire/firestore';
+import {  addDoc, collection, collectionData, Firestore, orderBy, query, Timestamp} from '@angular/fire/firestore';
 
 export interface Message{
   email: string,
@@ -30,5 +30,11 @@ export class FirestoreService {
       date: currentDate,
     };
     this.guardarDato('logs_users', log);
+  }
+
+  traerLista(coleccionNombre:string){
+    let col = collection(this.firestore, coleccionNombre);
+    const consulta = query(col, orderBy('fecha', 'desc'));
+    return collectionData(query(col, orderBy('fecha', 'desc')));
   }
 }

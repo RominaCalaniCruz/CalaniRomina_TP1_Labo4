@@ -21,7 +21,12 @@ export const routes: Routes = [
   },
   {
     path: 'chat',
-    loadComponent: ()=>
-        import('./componentes/chat/chat.component').then((c) => c.ChatComponent),
-}
+    loadComponent: () =>
+      import('./componentes/chat/chat.component').then((c) => c.ChatComponent),
+  },
+  {
+    path: 'resultados',
+    loadComponent: () =>
+      import('./componentes/resultados/resultados.component').then((c) => c.ResultadosComponent),
+  },
 ];

@@ -1,19 +1,38 @@
 <div class="flex flex-col mt-5 items-center">
 
-    <h1 class="mb-4 text-4xl leading-relaxed text-center  font-extrabold  text-gray-900 md:text-5xl lg:text-6xl dark:text-white">Trabajo Práctico N°1 <br> Laboratorio IV</h1>
-    <p (click)="goTo('sobre-mi')" class="mb-2 text-lg font-normal hover:text-white hover:underline text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-      Romina Calani Cruz
-    </p>
-    <p class="mb-3 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-    
-      2024 - 2do Cuatrimestre
-    </p>
-    <p class="mb-3 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
-    
-      Ultima actualización: 7/10/24
-    </p>
-    <a (click)="goTo('juegos')" class="animate__animated animate__jello animate__infinite inline-flex items-center mb-10 justify-center px-5 py-3 text-center text-white bg-primary rounded-lg hover:bg-black focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
-        Jugar
-        <ng-icon name="jamPlaySquareF" class="ms-2" color="white"></ng-icon>     
-    </a>
-  </div>
+  <h1
+    class="md:mb-10 md:mt-5 text-2xl md:text-4xl leading-relaxed text-center  font-extrabold  text-gray-900 lg:text-6xl dark:text-white">
+    Trabajo Práctico N°1 </h1>
+    <h1
+    class="mb-5 md:mb-10 text-2xl md:text-4xl  text-center  font-extrabold  text-gray-900 lg:text-6xl dark:text-white">
+    Laboratorio IV</h1>
+  <p (click)="goTo('sobre-mi')"
+    class="mb-2 text-lg font-normal hover:text-white hover:underline text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+    Romina Calani Cruz
+  </p>
+  <p class="mb-3 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+
+    2024 - 2do Cuatrimestre
+  </p>
+  <p class="mb-3 text-lg font-normal text-gray-400 lg:text-xl sm:px-16 xl:px-48 dark:text-gray-400">
+
+    Ultima actualización: 7/10/24
+  </p>
+  <a (click)="goTo('juegos')"
+    class="animate__animated animate__jello animate__infinite inline-flex items-center mb-10 justify-center px-5 py-3 text-center text-white bg-primary rounded-lg hover:bg-black focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    Jugar
+    <ng-icon name="jamPlaySquareF" class="ms-2" color="white"></ng-icon>
+  </a>
+  <a (click)="goTo('resultados')"
+    class="inline-flex items-center mb-10 justify-center px-5 py-2 text-center text-white bg-gradient-to-r from-pink-400 via-pink-500 to-pink-600 hover:bg-gradient-to-br rounded-lg hover:bg-black focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    Ver Resultados
+    <ng-icon name="tdesignListNumbered" class="ms-2" color="white"></ng-icon>
+  </a>
+  <a (click)="openModal()"
+    class="inline-flex items-center mb-10 justify-center px-5 py-2 text-center text-white bg-gradient-to-r from-teal-400 via-teal-500 to-teal-600 hover:bg-gradient-to-br rounded-lg hover:bg-black focus:ring-4 focus:ring-blue-300 dark:focus:ring-blue-900">
+    Completar encuesta
+    <ng-icon name="jamWriteF" class="ms-2" color="white"></ng-icon>
+  </a>
+</div>
+
+<app-encuesta></app-encuesta>
