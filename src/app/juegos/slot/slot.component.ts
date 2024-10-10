@@ -24,9 +24,9 @@ interface Reel {
 })
 export class SlotComponent {
   reels: Reel[] = [
-    { images: ['/slot/1.png', '/slot/2.png', '/slot/3.png', '/slot/4.png', '/slot/5.png', '/slot/6.png', '/slot/7.png'], currentIndex: 0, currentImage: '', intervalTime: 300 },
-    { images: ['/slot/1.png', '/slot/2.png', '/slot/3.png', '/slot/4.png', '/slot/5.png', '/slot/6.png', '/slot/7.png'], currentIndex: 0, currentImage: '', intervalTime: 500 },
-    { images: ['/slot/1.png', '/slot/2.png', '/slot/3.png', '/slot/4.png', '/slot/5.png', '/slot/6.png', '/slot/7.png'], currentIndex: 0, currentImage: '', intervalTime: 700 }
+    { images: ['./slot_1.png', './slot_2.png', './slot_3.png', './slot_4.png', './slot_5.png', './slot_6.png', './slot_7.png'], currentIndex: 0, currentImage: '', intervalTime: 300 },
+    { images: ['./slot_1.png', './slot_2.png', './slot_3.png', './slot_4.png', './slot_5.png', './slot_6.png', './slot_7.png'], currentIndex: 0, currentImage: '', intervalTime: 500 },
+    { images: ['./slot_1.png', './slot_2.png', './slot_3.png', './slot_4.png', './slot_5.png', './slot_6.png', './slot_7.png'], currentIndex: 0, currentImage: '', intervalTime: 700 }
   ];
   cantPuntos:number=0;
   start: boolean = false;

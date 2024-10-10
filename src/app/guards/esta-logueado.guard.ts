@@ -14,5 +14,5 @@ export const estaLogueadoGuard: CanActivateFn = (route, state) => {
 
   // mnsjSvc.ErrorToast("Debe estar logueado para acceder a esta pagina.");
   toastM.error("Debe estar logueado para acceder a esta pagina.","ERROR")
-  return router.navigateByUrl("/404");
+  return false;
 };

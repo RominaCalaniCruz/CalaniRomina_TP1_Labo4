@@ -3,7 +3,7 @@
     
     <div class="portada rounded-md bg-transparent border border-secondary">
 
-      <img src="/ahorcado/{{ cantIntentos }}.png" class="ahorcado-img" />
+      <img src="./a_{{ cantIntentos }}.png" class="ahorcado-img" />
   
       <h2 class="text-sm md:text-2xl text-white py-1 rounded-b-md bg-gray-700 w-full text-center ">
         Intentos <small> {{ cantIntentos }} / 7</small>
@@ -17,12 +17,12 @@
         </div>
       
         <div class="ganador mt-5 md:mt-0 text-primary text-5xl text-center" *ngIf="gano">
-          <h1>¡Felicidades Ganaste!</h1>
+          <h1 style="color: #0abf31f3;">¡Felicidades Ganaste!</h1>
           <h1 class="mt-2">Obtuviste {{cantPuntos}} puntos</h1>
         </div>
       
         <div class="perdedor md:text-4xl text-primary" *ngIf="perdio">
-          <h1>Ups..perdiste ( ´•︵•` )</h1>
+          <h1 style="color:#f24c4c;font-weight: bold;">Ups..perdiste ( ´•︵•` )</h1>
           <p class="md:text-2xl md:mt-3">
             La palabra era: <strong>{{ palabra }}</strong>
           </p>

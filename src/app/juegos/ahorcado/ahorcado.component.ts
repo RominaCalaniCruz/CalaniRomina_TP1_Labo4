@@ -18,7 +18,7 @@ export class AhorcadoComponent {
   gano = false;
   perdio = false;
   jugando = true;
-  cantPuntos:number = 100;
+  cantPuntos:number = 0;
   botonesHabilitados: boolean[][]=[];
   fireSvc = inject(FirestoreService);
   authSvc = inject(AuthService);
@@ -67,22 +67,21 @@ export class AhorcadoComponent {
       this.gano = true;
       this.jugando = false;
       console.log('GANO');
+      this.calcularPuntaje();
+      // this.toastM.success(`Tu puntaje total es de: ${this.cantPuntos}`,"GANASTE!");
       this.guardarPuntaje();
     }
     if (this.cantIntentos >= this.cantIntentosMax) {
       this.perdio = true;
       this.jugando = false;
       console.log('PERDIO');
-      this.guardarPuntaje();
     }
   }
 
   existeLetra(letra: string) {
     if (!this.palabra.includes(letra)) {
       this.cantIntentos++;
-      this.cantPuntos-=10;      
-      this.toastM.error(" - 10 puntos","Letra equivocada!",{positionClass:'toast-bottom-right',timeOut:900});
-
+      this.toastM.error(`Te quedan ${this.cantIntentosMax - this.cantIntentos} intentos`,"Letra equivocada!",{positionClass:'toast-bottom-right',timeOut:1500});
     }
   }
 
@@ -99,12 +98,16 @@ export class AhorcadoComponent {
     })
   }
 
+  calcularPuntaje(){
+    this.cantPuntos = (this.cantIntentosMax - this.cantIntentos) * 35;
+  }
+
   reiniciarPartida() {
     
     this.inicializarValores();
     this.jugando = true;
     this.cantIntentos = 0;
-    this.cantPuntos = 100;
+    this.cantPuntos = 0;
     this.perdio = false;
     this.gano = false;
     // Swal.fire({
