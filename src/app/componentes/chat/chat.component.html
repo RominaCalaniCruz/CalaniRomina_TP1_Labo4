@@ -20,7 +20,7 @@
       </div>
   
       <div class="message-input">
-        <input type="text" class="border border-gray-300 focus:ring-secondary focus:border-secondary" [(ngModel)]="newMessage" placeholder="Escribe algo..." />
+        <input (keypress.enter)="guardarMensaje()" type="text" class="border border-gray-300 focus:ring-secondary focus:border-secondary" [(ngModel)]="newMessage" placeholder="Escribe algo..." />
         <button mat-fab color="warn" (click)="guardarMensaje()">
           <ng-icon name="matSendRound" ></ng-icon> 
         </button>
@@ -29,4 +29,8 @@
     <div class="no-registrado" *ngIf="!authSvc.sesionActiva">
       <h3>Necesitas iniciar sesion para acceder al chat.</h3>
     </div>
+  </div>
+
+  <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50 pointer-events-auto">
+    <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
   </div>

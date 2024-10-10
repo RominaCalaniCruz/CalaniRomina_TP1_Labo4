@@ -1,0 +1,58 @@
+label {
+    // color: #4A2359;
+    font-weight: bold;
+}
+
+// select option:hover{
+// background-color: aqua;
+//     box-shadow: 0 0 10px 100px #FFAE7E inset !important;
+// }
+
+// select:focus, option:hover > option:checked { 
+//     background: #ac1a1a !important;
+// }
+select option:hover {
+    box-shadow: 0 0 10px 100px #FFAE7E inset !important;
+    border-radius: 5px;
+    color: white;
+}
+
+select option:checked {
+    box-shadow: 0 0 10px 100px #ffad7ec5 inset !important;
+    border-radius: 5px;
+}
+// --------------------
+
+// .select-animated {
+//     transition: all 0.3s ease-in-out;
+//     overflow: hidden;
+//     /* Asegura que se vea la animación de cambio de tamaño */
+//   }
+  
+//   .select-animated:focus {
+//     /* Anima suavemente cuando se abre */
+//     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2); /* Añadir una sombra sutil al abrirse */
+//   }
+  
+//   .select-animated:blur {
+//     /* Anima suavemente cuando se cierra */
+//     box-shadow: none; /* Elimina la sombra al cerrarse */
+//   }
+
+
+
+
+.select-animation {
+    transition: height 0.3s ease-in-out; /* Transición de altura */
+    overflow: hidden;
+    height: 40px; /* Tamaño inicial del select */
+
+  }
+  
+  .select-animation.open {
+    height: 125px; /* Tamaño cuando el select se abre (ajustar según la cantidad de opciones) */
+  }
+  
+  .select-animation.closing {
+    height: 40px; /* Tamaño cuando el select se cierra */
+  }

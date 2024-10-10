@@ -1,114 +1,110 @@
-<div
-  *ngIf="isVisible"
-  class="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50"
->
-  <div class="bg-white p-6 rounded-lg w-11/12 md:w-2/3 lg:w-1/2">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-xl font-bold">Encuesta</h2>
-      <button
-        class="text-gray-500 hover:text-gray-700"
-        (click)="closeModal()"
-      >
-        ✖
-      </button>
-    </div>
+<!-- ------------------ -->
 
-    <!-- Formulario de Encuesta -->
-    <form [formGroup]="encuestaForm" (ngSubmit)="submitSurvey()">
-      <div class="mb-4">
-        <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre y Apellido</label>
-        <input
-          type="text"
-          id="nombre"
-          formControlName="nombre"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          required
-        />
-        <div *ngIf="encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched" class="text-red-500 text-sm">
-          Este campo es requerido.
-        </div>
-      </div>
+<div [class.pointer-events-none]="isLoading" #encuestaModal id="encuestaModal" tabindex="-1" aria-hidden="true"
+  [ngClass]="{ 'animate-slideInUp': showModal, 'animate-slideOutDown': !showModal }"
+  class="hidden  overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+  <div class="relative p-4 w-full max-w-md max-h-full ">
+    <div class="relative bg-white rounded-lg shadow dark:bg-gray-700 ">
+      <div class="flex items-center bg-primary justify-between p-3 md:p-3 border-b rounded-t dark:border-gray-600">
+        <h3 class="text-xl  font-semibold text-gray-900 dark:text-white">
+          Envia una reseña
+        </h3>
+        <button type="button"
+          class="end-2.5 text-gray-400 bg-transparent hover:bg-secondary hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+          (click)="cerrar()">
 
-      <div class="mb-4">
-        <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
-        <input
-          type="number"
-          id="edad"
-          formControlName="edad"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          required
-          min="18"
-          max="99"
-        />
-        <div *ngIf="encuestaForm.get('edad')?.invalid && encuestaForm.get('edad')?.touched" class="text-red-500 text-sm">
-          La edad debe ser mayor a 18 y menor a 99.
-        </div>
+          <ng-icon class="w-3 h-3" aria-hidden="true" name="jamCloseRectangleF" size="2em" color="white"></ng-icon>
+          <span class="sr-only">Cerrar</span>
+        </button>
       </div>
+      <div class="p-3 md:p-4">
+        <!-- Formulario -->
+        <form [formGroup]="encuestaForm">
+          <div class="mb-4">
+            <label for="nombre" class="block  text-sm font-medium text-gray-700">Nombre y Apellido</label>
+            <input type="text" id="nombre" formControlName="nombre"
+              class="mt-1.5 py-1.5 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+              required />
+            <div *ngIf="encuestaForm.get('nombre')?.invalid && encuestaForm.get('nombre')?.touched"
+              class="text-red-500 text-sm">
+              Este campo es requerido.
+            </div>
+          </div>
 
-      <div class="mb-4">
-        <label for="telefono" class="block text-sm font-medium text-gray-700">Número de Teléfono</label>
-        <input
-          type="text"
-          id="telefono"
-          formControlName="telefono"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          pattern="[0-9]{10}"
-          required
-        />
-        <div *ngIf="encuestaForm.get('telefono')?.invalid && encuestaForm.get('telefono')?.touched" class="text-red-500 text-sm">
-          El número debe tener hasta 10 dígitos y solo números.
-        </div>
-      </div>
+          <div class="mb-4">
+            <label for="edad" class="block text-sm font-medium text-gray-700">Edad</label>
+            <input type="number" id="edad" formControlName="edad"
+              class="mt-1.5 py-1.5 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+              required min="18" max="99" />
+            <div *ngIf="encuestaForm.get('edad')?.invalid && encuestaForm.get('edad')?.touched"
+              class="text-red-500 text-sm">
+              La edad debe ser mayor a 18 y menor a 99.
+            </div>
+          </div>
 
-      <!-- Pregunta 1: Juegos Favoritos -->
-      <div class="mb-4">
-        <label for="juegoFavorito" class="block text-sm font-medium text-gray-700">Juego Favorito?</label>
-        <select
-          id="juegoFavorito"
-          formControlName="juegoFavorito"
-          class="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-        >
-          <option value="" disabled>Seleccione un juego</option>
-          <option *ngFor="let juego of juegosDisponibles" [value]="juego">
-            {{ juego }}
-          </option>
-        </select>
-        <div *ngIf="encuestaForm.get('juegoFavorito')?.invalid && encuestaForm.get('juegoFavorito')?.touched"
-          class="text-red-500 text-sm">
-          Seleccione un juego favorito.
-        </div>
-      </div>
-      <!-- <div *ngFor="let juego of juegosFavoritos" class="flex items-center mb-4">
+          <div class="mb-4">
+            <label for="celular" class="block text-sm font-medium text-gray-700">Número de Celular</label>
+            <input type="text" id="celular" formControlName="celular"
+              class="mt-1.5 py-1.5 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+              pattern="[0-9]{10}" required />
+            <div *ngIf="encuestaForm.get('celular')?.invalid && encuestaForm.get('celular')?.touched"
+              class="text-red-500 text-sm">
+              El número debe tener máximo 10 dígitos numericos.
+            </div>
+          </div>
+
+          <!-- Pregunta 1: Juegos Favoritos -->
+          <div class="mb-4">
+            <label for="juegoFavorito" class="block text-sm font-medium text-gray-700">Juego Favorito?</label>
+            <select id="juegoFavorito" formControlName="juegoFavorito"
+              class="mt-1.5 block w-full pl-3 pr-10 py-2 text-base border-gray-300  focus:border-primary focus:ring-primary sm:text-sm rounded-md select-animation"
+              (focus)="onOpenSelect()" (blur)="onCloseSelect()" (change)="onSelectOption()">
+              <option value="" disabled>Seleccione un juego</option>
+              <option *ngFor="let juego of juegosDisponibles" [value]="juego">
+                {{ juego }}
+              </option>
+            </select>
+            <div *ngIf="encuestaForm.get('juegoFavorito')?.invalid && encuestaForm.get('juegoFavorito')?.touched"
+              class="text-red-500 text-sm">
+              Seleccione un juego favorito.
+            </div>
+          </div>
+          <!-- <div *ngFor="let juego of juegosFavoritos" class="flex items-center mb-4">
+                  onfocus='this.size=5;' onblur='this.size=0;' onchange='this.size=1; this.blur();'
+
         <input id="default-checkbox" type="checkbox" value="" class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
         <label for="default-checkbox" class="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300">Default checkbox</label>
 
     </div> -->
-      <!-- Pregunta 2: Recomendación de la Página -->
-      <div class="mb-4">
-        <label class="block text-sm font-medium text-gray-700">¿Recomendarías la Página?</label>
-        <div class="flex items-center">
-          <input type="radio" id="si" value="Si" formControlName="recomendar" class="mr-2" />
-          <label for="si" class="mr-4">Sí</label>
-          <input type="radio" id="no" value="No" formControlName="recomendar" class="mr-2" />
-          <label for="no">No</label>
-        </div>
-      </div>
+          <!-- Pregunta 2: Recomendación de la Página -->
+          <div class="mb-4 flex flex-row justify-between">
+            <label class=" text-sm font-medium text-gray-700">¿Recomendarías la Página?</label>
+            <div class="flex items-center">
+              <input type="radio" id="si" value="Si" formControlName="recomendar" class="mr-2" />
+              <label for="si" class="mr-4 text-sm">Sí</label>
+              <input type="radio" id="no" value="No" formControlName="recomendar" class="mr-2" />
+              <label for="no" class="text-sm">No</label>
+            </div>
+          </div>
 
-      <!-- Pregunta 3: Juego que Agregarías -->
-      <div class="mb-4">
-        <label for="juegoSugerido" class="block text-sm font-medium text-gray-700">¿Qué juego agregarías?</label>
-        <textarea
-          id="juegoSugerido"
-          formControlName="juegoSugerido"
-          class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-          rows="3"
-          required
-        ></textarea>
-      </div>
+          <!-- Pregunta 3: Juego que Agregarías -->
+          <div class="mb-4">
+            <label for="juegoSugerido" class="block text-sm font-medium text-gray-700">¿Qué juego agregarías?</label>
+            <input type="text" id="juegoSugerido" formControlName="juegoSugerido"
+              class="mt-1.5 py-1.5 block w-full border-gray-300 rounded-md shadow-sm focus:border-primary focus:ring-primary"
+              required>
+          </div>
 
-      <div class="flex justify-end mt-6">
-        <button (click)="submitSurvey()" type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Enviar</button>
+          <div class="flex justify-center mt-4">
+            <button (click)="enviarEncuesta()" type="submit"
+              class="bg-primary hover:bg-secondary text-white font-bold py-2 px-4 rounded">Enviar</button>
+          </div>
+        </form>
       </div>
-    </form>
+    </div>
   </div>
+</div>
+
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50 pointer-events-auto">
+  <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
 </div>

@@ -25,8 +25,5 @@ export class JuegosComponent {
   navegarAJuego(nombre: string): void {
     this.router.navigate([nombre]);
   }
-  ver(){
-    this.toastr.success("Hola Romina","Bienvenido");
-  }
   
 }

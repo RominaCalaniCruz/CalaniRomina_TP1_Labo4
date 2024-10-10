@@ -9,8 +9,6 @@
         de vidas: {{cantVidas}}</span>
     <div style="display: flex; justify-content: center; align-items: center;">
 
-        <!-- <mat-progress-spinner color="warn" *ngIf="isLoading" mode="indeterminate"></mat-progress-spinner> -->
-
     </div>
     <div class="hearts-container mb-5" *ngIf="jugando || finJuego">
         <ng-icon size="50px" [name]="cantVidas >= 1 ? 'tablerHeartFill' : 'tablerHeartBroken'"
@@ -54,3 +52,7 @@
         </div>
     </div>
 </div>
+
+<div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50 pointer-events-auto">
+    <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
+  </div>

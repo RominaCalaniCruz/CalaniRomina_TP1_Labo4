@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { estaLogueadoGuard } from './guards/esta-logueado.guard';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'inicio', pathMatch: 'full' },
@@ -23,10 +24,16 @@ export const routes: Routes = [
     path: 'chat',
     loadComponent: () =>
       import('./componentes/chat/chat.component').then((c) => c.ChatComponent),
+    canActivate: [estaLogueadoGuard]
   },
   {
     path: 'resultados',
     loadComponent: () =>
       import('./componentes/resultados/resultados.component').then((c) => c.ResultadosComponent),
+  },
+  {
+    path: '**',
+    loadComponent: () =>
+      import('./componentes/not-found/not-found.component').then((c) => c.NotFoundComponent),
   },
 ];

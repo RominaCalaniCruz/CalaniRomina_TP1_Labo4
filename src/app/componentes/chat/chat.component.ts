@@ -20,6 +20,7 @@ export class ChatComponent implements OnInit, AfterContentInit, OnDestroy{
   login: boolean = false;
   messages: any = [];
   newMessage = '';
+  isLoading: boolean = true;
   emailActual: any = '';
   loginsCollection: any[] = [];
   sub!: Subscription;
@@ -94,6 +95,7 @@ export class ChatComponent implements OnInit, AfterContentInit, OnDestroy{
 
     this.sub = observable.subscribe((respuesta: any) => {
       this.messages = respuesta;
+      this.isLoading=false;
       console.log(respuesta);
     })
 

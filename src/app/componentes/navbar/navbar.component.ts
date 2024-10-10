@@ -4,7 +4,7 @@ import { NgIconComponent, provideIcons } from '@ng-icons/core';
 import { matAccountCircle } from '@ng-icons/material-icons/baseline';
 import { tablerSquareX, tablerMenu4 } from '@ng-icons/tabler-icons'
 import { LoginComponent } from '../login/login.component';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CommonModule } from '@angular/common';
 import { RegisterComponent } from '../register/register.component';
@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
   @ViewChild('login') loginCmp!: LoginComponent;
   authSvc = inject(AuthService);
   isDropdownOpen: boolean = false;
-
+  router = inject(Router);
   abrirModal() {
     this.loginCmp.abrir();
   }
@@ -32,6 +32,8 @@ export class NavbarComponent implements OnInit {
   cerrarSesion() {
     this.authSvc.closeSession();
     this.isDropdownOpen = false;
+    this.router.navigate(['']);
+
   }
   toggleDropdown() {
     this.isDropdownOpen = !this.isDropdownOpen;

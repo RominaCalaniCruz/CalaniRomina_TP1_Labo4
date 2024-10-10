@@ -105,16 +105,17 @@ export class CartasComponent implements OnInit {
       const currentCardValue = this.traerValorNumericoCarta(this.cards[this.currentCardIndex].value);
       if ((isHigher && nextCardValue > currentCardValue) || (!isHigher && nextCardValue < currentCardValue)) {
         this.message = 'Acertaste!';
-        this.cantPuntos++;
+        this.toastM.success("+ 5 puntos",this.message);
+        this.cantPuntos+=5;
       } else if ((isHigher && nextCardValue < currentCardValue) || (!isHigher && nextCardValue > currentCardValue)) {
-        this.message = 'Ups..incorrecto (╥﹏╥)';
+        this.message = 'Ups..incorrecto';
+        this.toastM.error("No sumas puntos",this.message);
         this.cantVidas--;        
       } else {
-        this.message = 'Son iguales (ㆆ_ㆆ)';
+        this.toastM.info("Que casualidad","Son iguales...");
       }
       this.vistaTemporal = true;
       this.mensajeTemporal = true;
-      this.toastM.info(this.message,"Resultado");
       setTimeout(() => {
         this.vistaTemporal = false;
         this.currentCardIndex++;

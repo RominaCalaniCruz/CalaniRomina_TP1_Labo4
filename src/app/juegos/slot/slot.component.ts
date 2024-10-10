@@ -1,4 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ToastrService } from 'ngx-toastr'
+import { FirestoreService } from '../../services/firestore.service';
+import { AuthService } from '../../services/auth.service';
+import { provideIcons } from '@ng-icons/core';
+import { tablerReload,tablerHandStop} from '@ng-icons/tabler-icons';
+import {tablerPlayerPlayFill} from '@ng-icons/tabler-icons/fill';
+import {matBackHand} from '@ng-icons/material-icons/baseline';
+import { Timestamp } from '@angular/fire/firestore';
+
 interface Reel {
   images: string[];
   currentIndex: number;
@@ -9,6 +18,7 @@ interface Reel {
 @Component({
   selector: 'app-slot',
   standalone: false,
+  providers: [provideIcons({tablerPlayerPlayFill,tablerReload,tablerHandStop,matBackHand})],
   templateUrl: './slot.component.html',
   styleUrl: './slot.component.scss'
 })
@@ -18,8 +28,11 @@ export class SlotComponent {
     { images: ['/slot/1.png', '/slot/2.png', '/slot/3.png', '/slot/4.png', '/slot/5.png', '/slot/6.png', '/slot/7.png'], currentIndex: 0, currentImage: '', intervalTime: 500 },
     { images: ['/slot/1.png', '/slot/2.png', '/slot/3.png', '/slot/4.png', '/slot/5.png', '/slot/6.png', '/slot/7.png'], currentIndex: 0, currentImage: '', intervalTime: 700 }
   ];
+  cantPuntos:number=0;
   start: boolean = false;
-
+  fireSvc = inject(FirestoreService);
+  authSvc = inject(AuthService);
+  toastM = inject(ToastrService);
   constructor() { }
 
   ngOnInit(): void {
@@ -52,30 +65,18 @@ export class SlotComponent {
     });
     const indices = this.reels.map(reel => reel.currentIndex);
     if (indices[0] === indices[1] && indices[1] === indices[2]) {
-      // Swal.fire(
-      //   {
-      //     icon: 'success',
-      //     title: 'GANASTE',
-      //     text: 'Tienes mucha suerte',
-      //   }
-      // );
+      this.cantPuntos=100;
+      this.toastM.success("100 puntos","GANASTE!");
+      this.guardarPuntaje();
 
     } else if (indices[0] === indices[1] || indices[1] === indices[2] || indices[0] === indices[2]) {
-      // Swal.fire(
-      //   {
-      //     icon: 'info',
-      //     title: 'CASI',
-      //     text: 'solo 2 coincidencia, estas cerca',
-      //   }
-      // );
+      this.cantPuntos = 30;
+      this.toastM.info("30 puntos","Algo es peor que nada...");
+      this.guardarPuntaje();
+
     } else {
-      // Swal.fire(
-      //   {
-      //     icon: 'error',
-      //     title: 'PERDISTE',
-      //     text: 'solo 1 coincidencia, mala suerte',
-      //   }
-      // );
+      this.cantPuntos = 0;
+      this.toastM.error("No ganaste ningun punto","Mejor suerte la próxima.");
     }
 
   }
@@ -83,5 +84,16 @@ export class SlotComponent {
   updateCurrentImage(reel: Reel): void {
     reel.currentImage = reel.images[reel.currentIndex];
   }
-
+  guardarPuntaje(){
+    const datos = {
+      email: this.authSvc.usuarioActual?.email,
+      puntos: this.cantPuntos,
+      fecha: Timestamp.fromDate(new Date()),
+      juego: "Ruleta"
+    }
+    this.fireSvc.guardarDato('resultados_juegos',datos).then(()=>{
+      console.log("se guardo\n"+datos);
+      
+    })
+  }
 }

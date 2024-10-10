@@ -32,6 +32,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     width: auto;
     padding: 10px 10px;
   }
@@ -44,7 +45,6 @@
   }
   
   .button-container {
-    background-color: whitesmoke;
     width: auto;
     margin: 20px;
     border-radius: 10px;

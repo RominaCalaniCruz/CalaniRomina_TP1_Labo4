@@ -1,4 +1,4 @@
-<div class="relative flex max-h-96 mt-10 justify-center overflow-x-auto w-full sm:rounded-lg">
+<div class="relative flex tabla mt-10 justify-center overflow-x-auto w-full sm:rounded-lg">
     <table class="w-full md:w-5/6 text-sm text-left rtl:text-right text-white border-collapse border-spacing-0 overflow-hidden rounded-lg">
       <!-- Encabezado -->
       <thead class="text-sm text-white font-extrabold uppercase bg-secondary rounded-t-lg">
@@ -12,14 +12,14 @@
       <!-- Cuerpo de la tabla -->
       <tbody >
         <tr
-          *ngFor="let item of listaResultados"
+          *ngFor="let item of listaFiltradaXUsuario"
           class="bg-transparent border-b border-l border-r rounded hover:bg-gray-400 hover:text-black transition duration-200 ease-in-out"
         >
           <td class="px-6 border-r py-4 whitespace-nowrap">
             {{ item.email }}
           </td>
           <td class="px-6 py-4 border-r">
-            {{ item.fecha.seconds * 1000 | date:'medium' }}
+            {{ item.fecha.toDate() | date : "short" }}
           </td>
           <td class="px-6 py-4 flex items-center border-r">
             <img
@@ -38,3 +38,7 @@
     </table>
   </div>
   
+
+  <div *ngIf="isLoading" class="fixed inset-0 flex items-center justify-center bg-gray-900/50 z-50 pointer-events-auto">
+    <img src="/fantasma.gif" alt="Loading..." class="md:w-48 w-40 " />
+  </div>

@@ -5,6 +5,7 @@ import { PreguntadosComponent } from './preguntados/preguntados.component';
 import { AhorcadoComponent } from './ahorcado/ahorcado.component';
 import { SlotComponent } from './slot/slot.component';
 import { CartasComponent } from './cartas/cartas.component';
+import { estaLogueadoGuard } from '../guards/esta-logueado.guard';
 
 const routes: Routes = [
   {
@@ -13,19 +14,23 @@ const routes: Routes = [
   },
   {
     path: 'preguntados',
-    component: PreguntadosComponent
+    component: PreguntadosComponent,
+    canActivate: [estaLogueadoGuard]
   },
   {
     path: 'ahorcado',
-    component: AhorcadoComponent
+    component: AhorcadoComponent,
+    canActivate: [estaLogueadoGuard]
   },
   {
     path: 'slot',
-    component: SlotComponent
+    component: SlotComponent,
+    canActivate: [estaLogueadoGuard]
   },
   {
     path: 'cartas',
-    component: CartasComponent
+    component: CartasComponent,
+    canActivate: [estaLogueadoGuard]
   }
 ];
 

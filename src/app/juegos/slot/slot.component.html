@@ -1,7 +1,9 @@
 <div class="titulo">
-    <h1 class="text-primary text-4xl text-center m-0 mt-5 mb-10">
-      MAQUINA TRAGAMONEDAS
+    <h1 class="text-primary text-4xl text-center m-0 mt-5">
+      Ruleta de la suerte
     </h1>
+    <span class="text-xl text-black mt-3 mb-5"
+   >Gira las veces que quieras! <br> 3 coincidencias: 100 puntos <br> 2 coincidencias: 30 puntos </span>
   </div>
   
   <div class="slot-machine">
@@ -11,11 +13,15 @@
   </div>
   <div class="botonera">
     <div class="button-container">
-      <button mat-flat-button color="accent" (click)="girarReel()" [disabled]="start">
+      <button class="bg-primary py-7 rounded-md text-center inline-flex justify-center items-center " color="accent" (click)="girarReel()" [disabled]="start">
         Girar
+        <ng-icon name="tablerReload" color="white"></ng-icon>
+
       </button>
-      <button mat-flat-button color="warn" (click)="detenerReel()" [disabled]="!start">
+      <button class=" bg-primary py-7 rounded-md text-center inline-flex justify-center items-center " color="warn" (click)="detenerReel()" [disabled]="!start">
         Detener
+        <ng-icon name="matBackHand" color="white"></ng-icon>
+
       </button>
     </div>
   </div>
